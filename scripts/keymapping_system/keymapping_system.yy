@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"keymapping_system",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"keymapping_system",
+  "parent":{
+    "name":"scripts",
+    "path":"folders/scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

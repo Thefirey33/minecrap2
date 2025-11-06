@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"get_current_deltatime",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"get_current_deltatime",
+  "parent":{
+    "name":"scripts",
+    "path":"folders/scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
