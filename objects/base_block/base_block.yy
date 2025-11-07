@@ -1,18 +1,21 @@
 {
   "$GMObject":"",
-  "%Name":"gravity_based_object",
+  "%Name":"base_block",
   "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"gravity_based_object",
+  "name":"base_block",
   "overriddenProperties":[],
   "parent":{
-    "name":"base",
-    "path":"folders/objects/base.yy",
+    "name":"blocks",
+    "path":"folders/objects/blocks.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"solid_object",
+    "path":"objects/solid_object/solid_object.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

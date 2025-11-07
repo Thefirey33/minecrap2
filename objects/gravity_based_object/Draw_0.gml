@@ -1,21 +1,34 @@
+// This is catastrophically bad, don't do this.
+// Someone needs to fix this.
 
-if (check_if_key_held(global.KEYBOARD_CONFIGURATION.debug.show))
-{
-    displaying_text = string("marg: {0}\ngravity: {1}\n", _collision_margin, _current_gravity);
-    switch (_currentCollision) {
-	   case current_collision_types.Bottom:
-            displaying_text += "bottom\n";
-            break;
-        case current_collision_types.Left:
-            displaying_text += "left\n";
-            break;
-        case current_collision_types.Right:
-            displaying_text += "right\n";
-            break;
-        case current_collision_types.Top:
-            displaying_text += "top\n";
-            break;
-    }
-    draw_text(x, y - sprite_height - string_height(displaying_text), displaying_text)
+y -= _current_gravity * get_current_deltatime()
+var
+    _x_sprite_width = x + sprite_width,
+    _y_sprite_height = y + sprite_height;
+
+var _bottom_collision = collision_rectangle(x, y + sprite_height - sprite_height / COLLISION_SPACE, x + sprite_width, y + sprite_height, ACCEPTABLE_COLLISIONS, true, true)
+if _bottom_collision {
+    y = _bottom_collision.bbox_top - sprite_height
+    _current_gravity = 0
 }
+else {
+    _current_gravity -= global.BASE_GRAVITY_EFFECT
+}
+var _top_collision = collision_rectangle(x, y, x + sprite_width, y + sprite_height / COLLISION_SPACE, ACCEPTABLE_COLLISIONS, true, true)
+if _top_collision {
+    y = _top_collision.bbox_bottom
+    _current_gravity = -_current_gravity / 2.0;
+}
+var _right_collision = collision_rectangle(x + sprite_width - global.COLLISION_MARGIN, y, x + sprite_width + global.COLLISION_MARGIN, y + sprite_height, ACCEPTABLE_COLLISIONS, true, true)
+if _right_collision and _current_horizontal_velocity > 0.0 {
+    x = _right_collision.bbox_left - sprite_width
+    _current_horizontal_velocity = 0
+}
+var _left_collision = collision_rectangle(x - global.COLLISION_MARGIN, y, x + global.COLLISION_MARGIN, y + sprite_height, ACCEPTABLE_COLLISIONS, true, true)
+if _left_collision and _current_horizontal_velocity < 0.0 {
+    x = _left_collision.bbox_right
+    _current_horizontal_velocity = 0
+}
+x += _current_horizontal_velocity * get_current_deltatime()
+
 draw_self()

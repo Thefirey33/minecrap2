@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"keymapping_system",
+  "%Name":"gui_system",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"keymapping_system",
+  "name":"gui_system",
   "parent":{
-    "name":"controls",
-    "path":"folders/scripts/controls.yy",
+    "name":"gui",
+    "path":"folders/scripts/gui.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

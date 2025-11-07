@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"textures",
-    "path":"folders/textures.yy",
+    "name":"base",
+    "path":"folders/textures/base.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

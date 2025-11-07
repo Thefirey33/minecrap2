@@ -1,4 +1,4 @@
-#macro GAME_NAME "Minecrap 2" 
+#macro GAME_NAME "minecrap2" 
 /// @description Handle an error, then end the game.
 /// @param {String} error_msg The Error - MSG.
 function handle_error(error_msg) {

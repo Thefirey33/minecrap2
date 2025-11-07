@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"keymapping_system",
+  "%Name":"cross_compatible_control",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"keymapping_system",
+  "name":"cross_compatible_control",
   "parent":{
     "name":"controls",
     "path":"folders/scripts/controls.yy",

@@ -1,16 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"solid_object",
-  "eventList":[],
+  "%Name":"control_method",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"solid_object",
+  "name":"control_method",
   "overriddenProperties":[],
   "parent":{
-    "name":"base",
-    "path":"folders/objects/base.yy",
+    "name":"debug",
+    "path":"folders/objects/debug.yy",
   },
   "parentObjectId":null,
-  "persistent":false,
+  "persistent":true,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,
@@ -27,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"solid_texture",
-    "path":"sprites/solid_texture/solid_texture.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

@@ -1,9 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"solid_object",
-  "eventList":[],
+  "%Name":"game_handler",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":3,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":2,"eventType":7,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"solid_object",
+  "name":"game_handler",
   "overriddenProperties":[],
   "parent":{
     "name":"base",
@@ -27,10 +30,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"solid_texture",
-    "path":"sprites/solid_texture/solid_texture.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

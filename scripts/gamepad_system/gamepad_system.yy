@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"keymapping_system",
+  "%Name":"gamepad_system",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"keymapping_system",
+  "name":"gamepad_system",
   "parent":{
     "name":"controls",
     "path":"folders/scripts/controls.yy",
