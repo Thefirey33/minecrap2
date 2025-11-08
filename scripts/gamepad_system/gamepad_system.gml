@@ -147,8 +147,30 @@ function tte_get_gamepad_held(device_name, button_idx){
     }
 }
 
+/// @description this checks if a gamepad button is being held down.
+//  @param {Real} device_name the device ID.
+function tte_get_gamepad_pressed(device_name, button_idx){
+    if not gamepad_is_connected(device_name)
+        return 0
+    if is_array(button_idx)
+    {
+        var _isHeld = false
+        for (var i = 0; i < array_length(button_idx); i++) {
+        	var _button = array_get(button_idx, i)
+            if (gamepad_button_check_pressed(device_name, _button))
+                _isHeld = true
+        }
+        return _isHeld
+    }
+    else {
+        return gamepad_button_check_pressed(device_name, button_idx)
+    }
+}
+
 function tte_gamepad_axis(device_name, positive_axis, negative_axis){
     if not gamepad_is_connected(device_name)
         return 0
     return tte_get_gamepad_held(device_name, positive_axis) + tte_get_gamepad_held(device_name, negative_axis) * -1
 }
+
+tte_gamepad_system_init();

@@ -1,4 +1,4 @@
-if global.IS_COMPUTER and debug_mode
+if global.IS_COMPUTER
 {
     var _currentSinnedColourValue = abs(sin(current_time / _sinDivide)) * 255
     var _isPressed = tte_check_if_key_held(global.KEYBOARD_CONFIGURATION.game.switch_method)

@@ -125,3 +125,5 @@ function tte_setup_keymapping(override = false){
         tte_setup_keymapping(true)
     }
 }
+
+tte_setup_keymapping();

@@ -1,0 +1,19 @@
+{
+  "$GMRoomUI":"",
+  "%Name":"RoomUI",
+  "children":[],
+  "locked":false,
+  "name":"RoomUI",
+  "parent":{
+    "name":"minecrap2",
+    "path":"minecrap2.yyp",
+  },
+  "resourceType":"GMRoomUI",
+  "resourceVersion":"2.0",
+  "viewspaceChildren":[
+    {"$GMRUILayer":"v1","%Name":"UILayer_1","alignItems":2,"children":[
+        {"$GMRTextItem":"v3","%Name":"text_37FEFA85","alignment":0,"charSpacing":0.0,"colour":4294967295,"flexProperties":{"$InstanceFlexProps":"v1","anchor":0,"resourceType":"InstanceFlexProps",},"fontId":{"name":"Font1","path":"fonts/Font1/Font1.yy",},"frameH":0.0,"frameW":0.0,"frozen":false,"ignore":false,"inheritedItemId":null,"inheritItemSettings":false,"lineSpacing":0.0,"name":"text_37FEFA85","paragraphSpacing":0.0,"resourceType":"GMRTextItem","resourceVersion":"2.0","rotation":0.0,"scaleX":1.0,"scaleY":1.0,"text":"DEVELOPMENT BUILD","wrap":false,"x":0.0,"y":0.0,},
+      ],"flexDirection":0,"gridX":32,"gridY":32,"justifyContent":1,"name":"UILayer_1","nodeColour":4282970801,"resourceType":"GMRUILayer","resourceVersion":"2.0",},
+  ],
+  "visible":true,
+}

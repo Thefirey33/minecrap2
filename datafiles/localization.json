@@ -1,0 +1,8 @@
+{
+	"en" : {
+		"instruction": "use arrows keys to move around.\nz to jump.\nx to run.",
+		"instruction_gamepad": "use D-PAD to move around.\nA to jump.\nB or RB to run.\nuse D-PAD up and down, and LT and RT to look around.",
+		"ok": "aight"
+	},
+	"tr" : {}
+}

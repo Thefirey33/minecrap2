@@ -1,0 +1,1 @@
+_zoomedInRendering = [0]

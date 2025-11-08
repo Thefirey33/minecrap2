@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"instruction_screen",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"instruction_screen",
+  "parent":{
+    "name":"screens",
+    "path":"folders/scripts/gui/screens.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
