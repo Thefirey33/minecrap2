@@ -5,7 +5,7 @@ global.CURRENT_LANGUAGE = "en"
 function tte_import_localization_from_json(){
     var _importedLocalizationFile = tte_load_file_all_lines(localization_location)
     global.LOCAL_KEYS = json_parse(_importedLocalizationFile)
-    show_debug_message("{0}/INFO: loaded local: {1}", GAME_NAME, global.LOCAL_KEYS)
+    show_debug_message("{0}/INFO: loaded localization...", GAME_NAME)
 }
 
 function tte_get_localization(lang, key) {

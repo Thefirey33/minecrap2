@@ -2,6 +2,8 @@ global.KEYBOARD_CONFIGURATION = {
     player: {
         left: vk_left,
         right: vk_right,
+        up: vk_up,
+        down: vk_down,
         jump: "Z",
         run: "X",
         interact: "E"
@@ -23,7 +25,7 @@ global.no_key_currently = 0.0;
 /// @param {String} positive_axis the positive axis keycode to use
 /// @param {String} negative_axis the negative axis keycode to use
 /// @returns {Real} the axis number
-function tte_do_axis(field_name, positive_axis, negative_axis){
+function tte_do_axis(field_name, positive_axis, negative_axis, is_pressed_axis = false){
     
     if not struct_exists(global.KEYBOARD_CONFIGURATION, field_name)
     {
@@ -36,6 +38,8 @@ function tte_do_axis(field_name, positive_axis, negative_axis){
         {
             var _positiveAxis = struct_get(_currentField, positive_axis);
             var _negativeAxis = struct_get(_currentField, negative_axis);
+            if is_pressed_axis
+                return tte_check_if_key_pressed(_positiveAxis) + tte_check_if_key_pressed(_negativeAxis) * -1
             return tte_check_if_key_held(_positiveAxis) + tte_check_if_key_held(_negativeAxis) * -1
         }
         else {
@@ -46,6 +50,9 @@ function tte_do_axis(field_name, positive_axis, negative_axis){
 }
 /// @description this checks if a key is currently being held.
 function tte_check_if_key_held(key_name){
+    if global.CURRENT_CONTROL_METHOD != control_methods.keyboard
+        return false
+    
     if is_real(key_name)
         return keyboard_check(key_name)
     else
@@ -53,6 +60,9 @@ function tte_check_if_key_held(key_name){
 }
 /// @description this checks if a key is right NOW pressed.
 function tte_check_if_key_pressed(key_name){
+    if global.CURRENT_CONTROL_METHOD != control_methods.keyboard
+        return false
+    
     if is_real(key_name)
         return keyboard_check_pressed(key_name)
     else

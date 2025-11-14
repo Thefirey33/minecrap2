@@ -1,6 +1,7 @@
 #macro gamepad_config_location working_directory + "tte_gamepad.json"
 
 global.GAMEPAD_SYSTEM = {
+    is_supported: false,
     connected_gamepads: 0,
     gamepad_info: [],
     gamepad_configurations: {
@@ -54,9 +55,11 @@ function tte_gamepad_config_init(override = false){
 }
 /// @description this initializes the gamepad.
 function tte_gamepad_system_init(){
+    global.GAMEPAD_SYSTEM.is_supported = true
     if not gamepad_is_supported()
     {
         show_debug_message("{0}/WARN: gamepad is not supported. Skipping gamepad initialization...", GAME_NAME)
+        global.GAMEPAD_SYSTEM.is_supported = false
         return;
     } else {
         global.GAMEPAD_SYSTEM.connected_gamepads = gamepad_get_device_count()
@@ -68,13 +71,13 @@ function tte_gamepad_system_init(){
                 break
             }
         }
-        // switch the current control method to a gamepad.
-        global.CURRENT_CONTROL_METHOD = control_methods.gamepad
         
         if (_isConnected)
         {
             for (var i = 0; i < global.GAMEPAD_SYSTEM.connected_gamepads; i++) {
-            	array_push(global.GAMEPAD_SYSTEM.gamepad_info, gamepad_get_description(i));
+                var _desc = gamepad_get_description(i)
+                if _desc != ""
+            	 array_push(global.GAMEPAD_SYSTEM.gamepad_info, _desc);
             }
             show_debug_message("{0}/INFO: connected gamepads: {1}", GAME_NAME, global.GAMEPAD_SYSTEM.gamepad_info)
             show_debug_message("{0}/INFO: using gamepad: {1}", GAME_NAME, global.GAMEPAD_SYSTEM.gamepad_configurations.currently_using)
@@ -129,28 +132,40 @@ function tte_check_if_gamepad_is_being_used(field) {
 }
 /// @description this checks if a gamepad button is being held down.
 //  @param {Real} device_name the device ID.
-function tte_get_gamepad_held(device_name, button_idx){
-    if not gamepad_is_connected(device_name)
+function tte_get_gamepad_held(device_name, button_idx, is_pressed = false){
+    if not gamepad_is_connected(device_name) or global.CURRENT_CONTROL_METHOD != control_methods.gamepad
         return 0
     if is_array(button_idx)
     {
         var _isHeld = false
         for (var i = 0; i < array_length(button_idx); i++) {
         	var _button = array_get(button_idx, i)
-            if (gamepad_button_check(device_name, _button))
-                _isHeld = true
+            if is_pressed
+            {
+                if gamepad_button_check_pressed(device_name, _button)
+                    _isHeld = true
+            }
+            else { 
+                if gamepad_button_check(device_name, _button)
+                    _isHeld = true
+            }
         }
         return _isHeld
     }
     else {
-        return gamepad_button_check(device_name, button_idx)
+        if is_pressed  {
+            return gamepad_button_check_pressed(device_name, button_idx)
+        }
+        else {
+        	return gamepad_button_check(device_name, button_idx)
+        }
     }
 }
 
 /// @description this checks if a gamepad button is being held down.
 //  @param {Real} device_name the device ID.
 function tte_get_gamepad_pressed(device_name, button_idx){
-    if not gamepad_is_connected(device_name)
+    if not gamepad_is_connected(device_name) or global.CURRENT_CONTROL_METHOD != control_methods.gamepad
         return 0
     if is_array(button_idx)
     {
@@ -167,10 +182,10 @@ function tte_get_gamepad_pressed(device_name, button_idx){
     }
 }
 
-function tte_gamepad_axis(device_name, positive_axis, negative_axis){
+function tte_gamepad_axis(device_name, positive_axis, negative_axis, is_pressed = false){
     if not gamepad_is_connected(device_name)
         return 0
-    return tte_get_gamepad_held(device_name, positive_axis) + tte_get_gamepad_held(device_name, negative_axis) * -1
+    return tte_get_gamepad_held(device_name, positive_axis, is_pressed) + tte_get_gamepad_held(device_name, negative_axis, is_pressed) * -1
 }
 
 tte_gamepad_system_init();

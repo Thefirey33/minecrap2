@@ -1,17 +1,19 @@
-_currentGroups = []
+global.CURRENT_SCREEN = "titlescreen"
+global._currentGroups = []
+global.current_screens = {
+    "titlescreen": function create_titlescreen(){
+        sc_titlescreen(tte_create_and_insert(), self)
+    },
+    "settings": function create_settings() {
+        sc_settings(tte_create_and_insert(), self)
+    },
+}
+
 function switch_screens(){
-    switch (global.CURRENT_SCREEN) {
-	   case "starting_screen":
-            var _starting_screen = new tte_screen_group(tte_gui_alignment.vertical)
-            // create the first initial instruction screen.
-            sc_instruction_screen(_starting_screen, self)
-            array_insert(_currentGroups, 0, _starting_screen)
-            break;
-        case "titlescreen":
-            var _title_screen = new tte_screen_group(tte_gui_alignment.horizontal)
-            // create the first initial instruction screen.
-            array_insert(_currentGroups, 0, _title_screen)
-            break;
-    }
+    if struct_exists(global.current_screens, global.CURRENT_SCREEN)
+        struct_get(global.current_screens, global.CURRENT_SCREEN)()
+    else 
+        // if the screen does not exist, just ignore it and move on.
+    	array_insert(global._currentGroups, 0, new tte_screen_group(tte_gui_alignment.vertical))
 }
 switch_screens()

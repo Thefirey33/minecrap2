@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"sc_settings",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"sc_settings",
+  "parent":{
+    "name":"screens",
+    "path":"folders/scripts/gui/screens.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

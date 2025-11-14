@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"instruction_screen",
+  "%Name":"vk_to_keycode",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"instruction_screen",
+  "name":"vk_to_keycode",
   "parent":{
-    "name":"screens",
-    "path":"folders/scripts/gui/screens.yy",
+    "name":"gui",
+    "path":"folders/scripts/gui.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

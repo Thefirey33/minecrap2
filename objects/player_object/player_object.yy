@@ -16,7 +16,7 @@
     "name":"gravity_based_object",
     "path":"objects/gravity_based_object/gravity_based_object.yy",
   },
-  "persistent":true,
+  "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
   "physicsFriction":0.2,

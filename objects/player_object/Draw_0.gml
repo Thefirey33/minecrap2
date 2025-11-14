@@ -81,4 +81,10 @@ if _left_collision and _current_horizontal_velocity < 0.0 {
     x = _left_collision.bbox_right
     _current_horizontal_velocity = 0
 }
+
+camera_set_view_pos(
+    _current_camera, 
+    x - (camera_get_view_width(_current_camera) / 2) + sprite_width / 2, 
+    y - (camera_get_view_height(_current_camera) / 2) + sprite_height / 2
+)
 x += _current_horizontal_velocity * get_current_deltatime()

@@ -1,8 +1,30 @@
 {
 	"en" : {
-		"instruction": "use arrows keys to move around.\nz to jump.\nx to run.",
-		"instruction_gamepad": "use D-PAD to move around.\nA to jump.\nB or RB to run.\nuse D-PAD up and down, and LT and RT to look around.",
-		"ok": "aight"
+		"settings": "Settings",
+		"fullscreen": "Fullscreen",
+		"play": "Start Program",
+		"back": "Back",
+		"gamepad": "Using External Controller",
+		"keybinding": "Assign Keys",
+		"end_program": "End Program",
+		"pick_a_key": "Press Your Hand On A Key.",
+		"pick_a_button": "Press Your Hand On A Button.",
+		"key_right": "Right Arrow Key",
+		"key_left": "Left Arrow Key",
+		"key_up": "Up Arrow Key",
+		"key_down": "Down Arrow Key",
+		"gamepad_face_1": "A / Cross",
+		"gamepad_face_2": "B / Circle",
+		"gamepad_face_3": "X / Square",
+		"gamepad_face_4": "Y / Triangle",
+		"gamepad_pad_r": "DPad Right",
+		"gamepad_pad_l": "DPad Left",
+		"gamepad_pad_d": "DPad Down",
+		"gamepad_pad_u": "DPad Up",
+		"gamepad_left_sh": "Left Shoulder Button",
+		"gamepad_right_sh": "Right Shoulder Button",
+		"gamepad_left_st": "Left Shoulder Trigger",
+		"gamepad_right_st": "Right Shoulder Trigger"
 	},
 	"tr" : {}
 }
