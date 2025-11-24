@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"base_definitions",
+  "%Name":"sc_name_your_guy",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"base_definitions",
+  "name":"sc_name_your_guy",
   "parent":{
-    "name":"gui",
-    "path":"folders/scripts/gui.yy",
+    "name":"screens",
+    "path":"folders/scripts/gui/screens.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

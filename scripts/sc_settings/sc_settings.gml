@@ -12,6 +12,7 @@ function sc_settings(screen_group, gui_handler){
         screen_group,
         0,
         function triggerer_function(group, self_current){
+			self_current.is_enabled = not self_current.is_enabled
             tte_save_config_with_field("game", {
                 is_fullscreen: self_current.is_enabled
             })
@@ -29,12 +30,15 @@ function sc_settings(screen_group, gui_handler){
         tte_get_config_value("game", "is_gamepad"),
         screen_group,
         1,
-        function change_input_type(){
-            global.CURRENT_CONTROL_METHOD = global.CURRENT_CONTROL_METHOD == control_methods.keyboard ? control_methods.gamepad : control_methods.keyboard
-            tte_save_config_with_field("game", {
-                is_gamepad: global.CURRENT_CONTROL_METHOD == control_methods.gamepad
-            })
-            tte_save_or_load_configuration(true)
+        function change_input_type(sc, _self){
+			if global.GAMEPAD_SYSTEM.connected_gamepads > 0 {
+				global.CURRENT_CONTROL_METHOD = global.CURRENT_CONTROL_METHOD == control_methods.keyboard ? control_methods.gamepad : control_methods.keyboard
+				tte_save_config_with_field("game", {
+					is_gamepad: global.CURRENT_CONTROL_METHOD == control_methods.gamepad
+				})
+				tte_save_or_load_configuration(true)
+				_self.is_enabled = global.CURRENT_CONTROL_METHOD == control_methods.gamepad 
+			}
         },
         global.GAMEPAD_SYSTEM.is_supported
     )

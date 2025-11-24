@@ -1,7 +1,5 @@
 // start drawing please.
 var _first = array_first(global._currentGroups)
-_first[$ "render_this_group"]()
-
 if array_length(global._currentGroups) > 0 {
     for (var i = 1; i < array_length(global._currentGroups); i++) {
     	var _val = global._currentGroups[i]
@@ -17,3 +15,5 @@ if array_length(global._currentGroups) > 0 {
         }
     }
 }
+_first.opacity = lerp(_first.opacity, 1, get_current_deltatime() * 5)
+_first[$ "render_this_group"]()

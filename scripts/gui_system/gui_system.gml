@@ -38,7 +38,7 @@ function tte_change_screen(new_screen){
 function tte_screen_group(_gui_alignment) constructor {
     objects_in_group = []
     tab_index = 0
-    opacity = 1
+    opacity = 0
     disabled_group = false
     max_group_val = 0
     m_gui_alignment = _gui_alignment
@@ -69,7 +69,8 @@ function tte_screen_group(_gui_alignment) constructor {
         
         draw_set_alpha(opacity)
         var _g = 1 + (1 - opacity)
-        matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 1, _g, 1))
+        // cool matrice stuff
+        matrix_set(matrix_world, matrix_build( 0, 0, 0, 0, 0, 0, 1, _g, 1 ) )
         for (var i = 0; i < array_length(self.objects_in_group); i++) {
         	var _idx = array_get(self.objects_in_group, i);
             if _idx[$ "render_this_object"] != undefined
@@ -113,7 +114,6 @@ function tte_gui_object(_x, _y, _screen_group) constructor  {
         ]
     }
 }
-
 function tte_gui_image(_x, _y, _screen_group, _sprite): tte_gui_object(_x, _y, _screen_group) constructor  {
     sprite = _sprite
     
@@ -155,7 +155,6 @@ function tte_gui_text(_x, _y, _text, _screen_group, _color, _font_size = 16) : t
         return _val
     }
 }
-
 /// @description base selectable class
 function tte_selectable_object(_x, _y, _screen_group, _tab_index_for_object) : tte_gui_object(_x, _y, _screen_group) constructor {
     tab_index_for_object = _tab_index_for_object
@@ -167,6 +166,104 @@ function tte_selectable_object(_x, _y, _screen_group, _tab_index_for_object) : t
         draw_set_colour(is_selected ? c_orange : c_white)
         draw_sprite_ext(BASE_SPRITE, 0, x, y, 1, 1, 0, draw_get_colour(), 255)
         draw_set_colour(_beforeColor)
+    }
+}
+function tte_gui_selectable_and_editable(_x, _y, _screen_group, _tab_index_for_object, _placeholder = "placeholder", _max_size = 16) : tte_selectable_object(_x, _y, _screen_group, _tab_index_for_object) constructor  {
+    MAXIMUM_SIZE_TEXT = string_repeat("_", _max_size)
+    max_size = [
+        string_width(MAXIMUM_SIZE_TEXT),
+        _max_size
+    ]
+    input_text = _placeholder
+    is_currently_being_edited = false
+    show_red_seconds = 0.0
+    _base_padding = 16
+    
+    render_rectangle = function (is_outline = false){
+        draw_rectangle(
+            self.x - self._base_padding, 
+            self.y - self._base_padding, 
+            self.x + self.max_size[0] + self._base_padding, 
+            self.y + self.max_size[1] + (OUTLINE_MARGIN * 2) + self._base_padding, 
+            is_outline
+        )
+    }
+    get_measurements = function (){
+        return [
+            self.max_size[0] + self._base_padding,
+            string_height(keyboard_string) + self.max_size[1] + OUTLINE_MARGIN * 2
+            
+        ]
+    }
+    function get_if_active(){
+        with (virtual_keyboard) {
+            if global.CURRENT_CONTROL_METHOD == control_methods.gamepad {
+                return self._isActive
+            }
+        }
+        return false
+    }
+    /// @description do init of the input system of the textbox
+    /// @param {Bool} _val the value to init to
+    function initializer_pls(_val){
+        global.FREEZE_GUI_CONTROLS = _val
+        is_currently_being_edited = _val
+        with (virtual_keyboard) {
+            if global.CURRENT_CONTROL_METHOD == control_methods.gamepad {
+                self._isActive = _val
+                self._cooldown = 1
+            }
+        }
+    }
+    
+    render_this_object = function (){
+        is_selected = (self.current_screen_group[$ "tab_index"] == tab_index_for_object)
+        var _isKeyboardPressed = (global.CURRENT_CONTROL_METHOD == control_methods.gamepad ? tte_get_gamepad_pressed(
+            global.GAMEPAD_SYSTEM.gamepad_configurations.currently_using,
+            global.GAMEPAD_SYSTEM.gamepad_configurations.player.jump
+        ) and !get_if_active() : keyboard_check_pressed(vk_enter)) 
+        if is_selected and not is_currently_being_edited and _isKeyboardPressed {
+            self.initializer_pls(true)
+            keyboard_string = input_text
+        }
+        else if is_currently_being_edited and global.FREEZE_GUI_CONTROLS and (global.CURRENT_CONTROL_METHOD == control_methods.gamepad and !get_if_active()) or _isKeyboardPressed {
+            self.initializer_pls(false)
+        } 
+        if is_currently_being_edited {
+            self.input_text = string_copy(keyboard_string, 0, 100)
+            keyboard_string = self.input_text
+            if keyboard_check(vk_anykey) and string_length(keyboard_string) >= 100
+                show_red_seconds = 255.0
+        }
+        // draw what the user is currently editing, also activate the virtual keyboard if possible 
+        draw_set_colour(c_black)
+        render_rectangle(false) 
+        show_red_seconds = max(0, show_red_seconds - get_current_deltatime() * 200)
+        draw_set_colour(self.is_selected ? make_colour_rgb(255.0, 255.0 - show_red_seconds, 0.0) : c_white)
+        render_rectangle(true)
+        var _maxSizeText = string_length(MAXIMUM_SIZE_TEXT)
+        var _maxSizeKeyb = string_length(self.input_text)
+        var _currentStr = string_copy(self.input_text, _maxSizeKeyb - _maxSizeText, _maxSizeText + 1)
+        // allow editing when it's currently being edited.
+        draw_text(self.x, self.y, _currentStr)
+        // draw the selection thing
+        draw_set_colour(c_white)
+        var _leftPos = self.x + string_width(_currentStr)
+        if floor(current_time / 100) % 6 < 3 and self.is_currently_being_edited {    
+            draw_rectangle(_leftPos, self.y, _leftPos + 2, self.y + 16 + OUTLINE_MARGIN * 2, false)
+        }
+
+        if not is_currently_being_edited and is_selected {
+            draw_set_alpha(0.5)
+            draw_text(
+                x + self.get_measurements()[0],
+                y,
+                tte_get_localization(
+                global.CURRENT_LANGUAGE,
+                "keyboard_instruction"
+            ))
+            draw_set_alpha(1.0)
+        }
     }
 }
 #macro OUTLINE_MARGIN 3
@@ -244,7 +341,6 @@ function tte_checkbox(_x, _y, _text, _is_enabled, _screen_group, _tab_index_for_
         and is_selected 
         and is_allowed and
          not global.FREEZE_GUI_CONTROLS {
-            is_enabled = not is_enabled
             function_to_trigger(current_screen_group, self)
         }
     }

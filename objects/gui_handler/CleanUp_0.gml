@@ -1,1 +1,1 @@
-delete _currentGroups
+delete global._currentGroups

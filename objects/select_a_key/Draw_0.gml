@@ -1,11 +1,14 @@
-matrix_set(matrix_world, matrix_build(0, 0, 0, 0, 0, 0, 1, _transitionValue, 1))
+gpu_set_ztestenable(true)
+matrix_set(matrix_world, matrix_build(0, 0, 1, 0, 0, 0, 1, _transitionValue, 1))
 _transitionValue = lerp(_transitionValue, _currentlyActive, 3 * get_current_deltatime())
-
+if keyboard_key == vk_nokey {
+	isReady = true
+}
 var _textToDraw = 
 typeOfAssignment == control_methods.keyboard ? 
 tte_get_localization(
     global.CURRENT_LANGUAGE,
-    "pick_a_key"
+    _isPressed ? "please_wait_key_is_ready" : "pick_a_key"
 ) :
 tte_get_localization(
     global.CURRENT_LANGUAGE,
@@ -41,15 +44,17 @@ draw_text(
     _textToDraw
 )
 draw_set_font(global.CURRENT_FONTS.normal)
-if keyboard_key != 0 and _currentlyActive {
+if keyboard_key != vk_nokey and not _isPressed and isReady {
     struct_set(global.KEYBOARD_CONFIGURATION.player, assignmentName, keyboard_key)
     tte_change_screen(global.CURRENT_SCREEN)
     tte_setup_keymapping(true)
-    _currentlyActive = 0
-    global.FREEZE_GUI_CONTROLS = false
+    // avoid keypress conflicts
+    _isPressed = true
+    alarm[0] = 100
 }
 if _currentlyActive != 1 and _transitionValue <= math_get_epsilon() {
     instance_destroy(self)
 }
 matrix_set(matrix_world, matrix_build_identity())
 draw_set_alpha(1)
+gpu_set_ztestenable(false)

@@ -1,5 +1,8 @@
+
 global.CURRENT_SCREEN = "titlescreen"
 global._currentGroups = []
+currentMatrix = matrix_build_identity()
+
 global.current_screens = {
     "titlescreen": function create_titlescreen(){
         sc_titlescreen(tte_create_and_insert(), self)
@@ -7,6 +10,9 @@ global.current_screens = {
     "settings": function create_settings() {
         sc_settings(tte_create_and_insert(), self)
     },
+    "name_your_guy": function create_name_your_guy(){
+        sc_name_your_guy(tte_create_and_insert(), self)
+    }
 }
 
 function switch_screens(){

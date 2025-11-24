@@ -27,11 +27,12 @@
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"determination-mono.ttf","CopyToMask":-1,"filePath":"datafiles","name":"determination-mono.ttf","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"localization.json","CopyToMask":-1,"filePath":"datafiles","name":"localization.json","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"onscreen_keyboard.txt","CopyToMask":-1,"filePath":"datafiles","name":"onscreen_keyboard.txt","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.14.0.207",
+    "IDEVersion":"2024.14.1.210",
   },
   "name":"minecrap2",
   "resources":[
@@ -43,9 +44,9 @@
     {"id":{"name":"player_object","path":"objects/player_object/player_object.yy",},},
     {"id":{"name":"select_a_key","path":"objects/select_a_key/select_a_key.yy",},},
     {"id":{"name":"solid_object","path":"objects/solid_object/solid_object.yy",},},
+    {"id":{"name":"virtual_keyboard","path":"objects/virtual_keyboard/virtual_keyboard.yy",},},
     {"id":{"name":"main_game_room","path":"rooms/main_game_room/main_game_room.yy",},},
     {"id":{"name":"starting_room","path":"rooms/starting_room/starting_room.yy",},},
-    {"id":{"name":"RoomUI","path":"roomui/RoomUI/RoomUI.yy",},},
     {"id":{"name":"base_definitions","path":"scripts/base_definitions/base_definitions.yy",},},
     {"id":{"name":"configuration_manager","path":"scripts/configuration_manager/configuration_manager.yy",},},
     {"id":{"name":"cross_compatible_control","path":"scripts/cross_compatible_control/cross_compatible_control.yy",},},
@@ -55,6 +56,7 @@
     {"id":{"name":"gui_system","path":"scripts/gui_system/gui_system.yy",},},
     {"id":{"name":"keymapping_system","path":"scripts/keymapping_system/keymapping_system.yy",},},
     {"id":{"name":"localization_system","path":"scripts/localization_system/localization_system.yy",},},
+    {"id":{"name":"sc_name_your_guy","path":"scripts/sc_name_your_guy/sc_name_your_guy.yy",},},
     {"id":{"name":"sc_settings","path":"scripts/sc_settings/sc_settings.yy",},},
     {"id":{"name":"sc_titlescreen","path":"scripts/sc_titlescreen/sc_titlescreen.yy",},},
     {"id":{"name":"vk_to_keycode","path":"scripts/vk_to_keycode/vk_to_keycode.yy",},},

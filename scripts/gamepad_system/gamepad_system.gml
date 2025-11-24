@@ -16,6 +16,9 @@ global.GAMEPAD_SYSTEM = {
             jump: gp_face1,
             run: [gp_face2, gp_shoulderr],   
             interact: gp_face3,
+            inventory: gp_face4,
+            backspace: gp_shoulderl,
+            space: gp_shoulderr
         }
     }
 }
@@ -62,12 +65,13 @@ function tte_gamepad_system_init(){
         global.GAMEPAD_SYSTEM.is_supported = false
         return;
     } else {
-        global.GAMEPAD_SYSTEM.connected_gamepads = gamepad_get_device_count()
+        global.GAMEPAD_SYSTEM.connected_gamepads = 0
         var _isConnected = false
-        for (var i = 0; i < global.GAMEPAD_SYSTEM.connected_gamepads; i++) {
+        for (var i = 0; i < gamepad_get_device_count(); i++) {
         	if (gamepad_is_connected(i))
             {
                 _isConnected = true
+				global.GAMEPAD_SYSTEM.connected_gamepads ++
                 break
             }
         }
@@ -84,6 +88,7 @@ function tte_gamepad_system_init(){
         }
         else {
         	show_debug_message("{0}/INFO: no gamepad available, skipping", GAME_NAME)
+            global.CURRENT_CONTROL_METHOD = control_methods.keyboard
         }
         tte_gamepad_config_init()
     } 

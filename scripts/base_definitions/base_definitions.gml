@@ -13,6 +13,9 @@ global.COLLISION_MARGIN = 3
 #macro COLLISION_SPACE 8.0 
 #macro ACCEPTABLE_COLLISIONS [solid_object, gravity_based_object]
 #macro BASE_TILE_SIZE 32 
+#macro BASE_GAME_WIDTH 800
+#macro BASE_GAME_HEIGHT 600  
+#macro CURRENT_CAMERA camera_get_default()
 
 /// @description this loads a file, with all the lines.
 /// @param {String} file_name the filename.
@@ -28,3 +31,4 @@ function tte_load_file_all_lines(file_name){
 
 global.VIRTUAL_MOUSE_CURSOR = [0, 0]
 global.CURRENT_PLAYER = undefined
+global.CURRENT_CAMERA_ID = 0

@@ -1,13 +1,18 @@
 {
 	"en" : {
+		"gamename": "Minecrap 2",
 		"settings": "Settings",
 		"fullscreen": "Fullscreen",
 		"play": "Start Program",
 		"back": "Back",
+		"ok": "Accept",
 		"gamepad": "Using External Controller",
 		"keybinding": "Assign Keys",
 		"end_program": "End Program",
 		"pick_a_key": "Press Your Hand On A Key.",
+		"keyboard_instruction": "[Enter / Jump] to edit.",
+		"please_wait_key_is_ready": "Please wait, setting up the key.",
+		"name_your_guy": "Name the Program.",
 		"pick_a_button": "Press Your Hand On A Button.",
 		"key_right": "Right Arrow Key",
 		"key_left": "Left Arrow Key",
