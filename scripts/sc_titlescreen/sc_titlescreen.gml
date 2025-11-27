@@ -33,7 +33,7 @@ function sc_titlescreen(screen_group, gui_handler){
     // the settings button
     var _settings = new tte_selectable_button_text(
         gui_handler.x,
-        _play.y + _play.get_measurements()[1] + OUTLINE_MARGIN * 2,
+        _play.y + _play.get_measurements().y + OUTLINE_MARGIN * 2,
         tte_get_localization(
             global.CURRENT_LANGUAGE,
             "settings"
@@ -47,7 +47,7 @@ function sc_titlescreen(screen_group, gui_handler){
     // the settings button
     var _end_program = new tte_selectable_button_text(
         gui_handler.x,
-        _settings.y + _settings.get_measurements()[1] + OUTLINE_MARGIN * 2,
+        _settings.y + _settings.get_measurements().y + OUTLINE_MARGIN * 2,
         tte_get_localization(
             global.CURRENT_LANGUAGE,
             "end_program"

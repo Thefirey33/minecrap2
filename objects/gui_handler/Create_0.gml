@@ -1,6 +1,13 @@
 
 global.CURRENT_SCREEN = "titlescreen"
 global._currentGroups = []
+tte_initialize_font_system()
+var _reverb_effect = audio_effect_create(AudioEffectType.Reverb1)
+_reverb_effect.size = 10.0
+_reverb_effect.mix = 0.5
+global.current_music = tte_create_audio_with_effects([_reverb_effect], AUDIO_ANOTHERHIM, true, 100)
+_currentEmitterInstance = global.current_music[$ "audio_emitter_instance"]
+audio_emitter_gain(_currentEmitterInstance, -100.0)
 currentMatrix = matrix_build_identity()
 
 global.current_screens = {
@@ -14,6 +21,7 @@ global.current_screens = {
         sc_name_your_guy(tte_create_and_insert(), self)
     }
 }
+
 
 function switch_screens(){
     if struct_exists(global.current_screens, global.CURRENT_SCREEN)

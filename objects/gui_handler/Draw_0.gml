@@ -1,3 +1,6 @@
+audio_emitter_gain(_currentEmitterInstance,  
+    min(1, audio_emitter_get_gain(_currentEmitterInstance) + get_current_deltatime() / 100)
+)
 // start drawing please.
 var _first = array_first(global._currentGroups)
 if array_length(global._currentGroups) > 0 {

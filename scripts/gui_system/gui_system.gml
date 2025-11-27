@@ -6,7 +6,13 @@ global.CURRENT_SCREEN = ""
 global.FREEZE_GUI_CONTROLS = false
 #macro BASE_SPRITE no_texture
 #macro MAIN_FONT "determination-mono.ttf"  
-
+/// @desc special coordinate system for simplifying processes.
+/// @param {any*} _x x-coordinate, can also be a width.
+/// @param {any*} _y y-coordinate, can also be a height.
+function tte_coordinate_system(_x, _y) constructor {
+    x = _x
+    y = _y
+}
 // all of the fonts defined...
 global.CURRENT_FONTS = {
     normal: font_add(MAIN_FONT, 15, false, false, 32, 128),
@@ -16,9 +22,23 @@ global.CURRENT_FONTS = {
     bold_xl: font_add(MAIN_FONT, 30, true, false, 32, 128),
     italic_xl: font_add(MAIN_FONT, 30, false, true, 32, 128),
 }
-
-function tte_create_and_insert(){
-    var _newScreenGroup = new tte_screen_group(tte_gui_alignment.vertical)
+/// @desc seperate initializer.
+function tte_initialize_font_system(){
+    // all of the fonts defined...
+    global.CURRENT_FONTS = {
+        normal: font_add(MAIN_FONT, 15, false, false, 32, 128),
+        bold: font_add(MAIN_FONT, 15, true, false, 32, 128),
+        italic: font_add(MAIN_FONT, 15, false, true, 32, 128),
+        normal_xl: font_add(MAIN_FONT, 30, false, false, 32, 128),
+        bold_xl: font_add(MAIN_FONT, 30, true, false, 32, 128),
+        italic_xl: font_add(MAIN_FONT, 30, false, true, 32, 128),
+    }
+}
+/// @desc this creates a new screen_group.
+/// @param {real} [alignment]=tte_gui_alignment.vertical the alignment.
+/// @returns {Struct.tte_screen_group} the screen group itself
+function tte_create_and_insert(alignment = tte_gui_alignment.vertical){
+    var _newScreenGroup = new tte_screen_group(alignment)
     array_insert(global._currentGroups, 0, _newScreenGroup)
     return _newScreenGroup
 }
@@ -45,20 +65,21 @@ function tte_screen_group(_gui_alignment) constructor {
     
     render_this_group = function (){
         if not (disabled_group or global.FREEZE_GUI_CONTROLS) {
+            var _b = self.m_gui_alignment == tte_gui_alignment.vertical
             if global.CURRENT_CONTROL_METHOD == control_methods.keyboard { 
                 self.tab_index += tte_do_axis(
                         "player",
-                        self.m_gui_alignment == tte_gui_alignment.vertical ? "down" : "left",
-                        self.m_gui_alignment == tte_gui_alignment.vertical ? "up" : "right",
+                        _b ? "down" : "left",
+                        _b ? "up" : "right",
                         true
                     )
                 } else { 
                     self.tab_index += tte_gamepad_axis(
                         global.GAMEPAD_SYSTEM.gamepad_configurations.currently_using,
-                        self.m_gui_alignment == tte_gui_alignment.vertical ? 
+                        _b ? 
                         global.GAMEPAD_SYSTEM.gamepad_configurations.player.down_look : 
                         global.GAMEPAD_SYSTEM.gamepad_configurations.player.left,
-                        self.m_gui_alignment == tte_gui_alignment.vertical ? 
+                        _b ? 
                         global.GAMEPAD_SYSTEM.gamepad_configurations.player.up_look :
                         global.GAMEPAD_SYSTEM.gamepad_configurations.player.right,
                         true
@@ -106,28 +127,35 @@ function tte_gui_object(_x, _y, _screen_group) constructor  {
     }
     
     /// @description this function returns the measurements for the gui_object and how it should be made.
-    /// @return {Array<Real>} returnee.
+    /// @return {Struct.tte_coordinate_system} returnee.
     get_measurements = function (){
-        return [
-            sprite_get_width(BASE_SPRITE),
-            sprite_get_height(BASE_SPRITE)
-        ]
+        return new tte_coordinate_system(sprite_get_width(BASE_SPRITE), sprite_get_height(BASE_SPRITE))
     }
 }
+/// @desc Function Description
+/// @param {any*} _x Description
+/// @param {any*} _y Description
+/// @param {any*} _screen_group Description
+/// @param {any*} _sprite Description
 function tte_gui_image(_x, _y, _screen_group, _sprite): tte_gui_object(_x, _y, _screen_group) constructor  {
     sprite = _sprite
     
     render_this_object = function() {
         draw_sprite(sprite, 0, x, y)
     }
-    
+    /// @description get measurements
+    /// @return {Struct.tte_coordinate_system} measurement
     get_measurements = function (){
-        return [
-            sprite_get_width(sprite),
-            sprite_get_height(sprite)
-        ]
+        return new tte_coordinate_system(sprite_get_width(sprite), sprite_get_height(sprite))
     }
 }
+/// @desc Function Description
+/// @param {any*} _x Description
+/// @param {any*} _y Description
+/// @param {any*} _text Description
+/// @param {any*} _screen_group Description
+/// @param {any*} _color Description
+/// @param {real} [_font_size]=16 Description
 function tte_gui_text(_x, _y, _text, _screen_group, _color, _font_size = 16) : tte_gui_object(_x, _y, _screen_group) constructor {
     text = _text
     color = _color
@@ -144,18 +172,20 @@ function tte_gui_text(_x, _y, _text, _screen_group, _color, _font_size = 16) : t
     }
     
     /// @description get the measurements please.
+    /// @return {Struct.tte_coordinate_system} measurement
     get_measurements = function (){
         var _beforeFont = draw_get_font()
         draw_set_font(font_to_use)
-        var _val = [
-            string_width(text),
-            string_height(text)
-        ]
+        var _val = new tte_coordinate_system(string_width(text), string_height(text))
         draw_set_font(_beforeFont)
         return _val
     }
 }
-/// @description base selectable class
+/// @desc this is the base selectable struct 
+/// @param {any*} _x x-coordinate.
+/// @param {any*} _y y-coordinate.
+/// @param {any*} _screen_group the screen group it is registered to.
+/// @param {any*} _tab_index_for_object the up and down, tab index for the object.
 function tte_selectable_object(_x, _y, _screen_group, _tab_index_for_object) : tte_gui_object(_x, _y, _screen_group) constructor {
     tab_index_for_object = _tab_index_for_object
     is_selected = false
@@ -168,12 +198,19 @@ function tte_selectable_object(_x, _y, _screen_group, _tab_index_for_object) : t
         draw_set_colour(_beforeColor)
     }
 }
-function tte_gui_selectable_and_editable(_x, _y, _screen_group, _tab_index_for_object, _placeholder = "placeholder", _max_size = 16) : tte_selectable_object(_x, _y, _screen_group, _tab_index_for_object) constructor  {
-    MAXIMUM_SIZE_TEXT = string_repeat("_", _max_size)
-    max_size = [
-        string_width(MAXIMUM_SIZE_TEXT),
-        _max_size
-    ]
+/// @desc this creates a selectable and editable, textbox object.
+/// @param {any*} _x x-coordinate.
+/// @param {any*} _y y-coordinate.
+/// @param {any*} _screen_group the screen group it is registered to.
+/// @param {any*} _tab_index_for_object the tab, up and down index for the object.
+/// @param {Struct.tte_coordinate_system} _max_size this is the sizing array.
+/// @param {Function} _function_to_trigger function to trigger when the text is submitted. (self, screen_group)
+/// @param {string} [_placeholder] the placeholder that the object can take.
+function tte_gui_selectable_and_editable(_x, _y, _screen_group, _tab_index_for_object, _max_size, _function_to_trigger, _placeholder = "placeholder") : tte_selectable_object(_x, _y, _screen_group, _tab_index_for_object) constructor  {
+    max_size = _max_size
+    MAXIMUM_SIZE_TEXT = max_size.x / 9
+    function_to_trigger = _function_to_trigger
+    show_debug_message(MAXIMUM_SIZE_TEXT)
     input_text = _placeholder
     is_currently_being_edited = false
     show_red_seconds = 0.0
@@ -183,17 +220,16 @@ function tte_gui_selectable_and_editable(_x, _y, _screen_group, _tab_index_for_o
         draw_rectangle(
             self.x - self._base_padding, 
             self.y - self._base_padding, 
-            self.x + self.max_size[0] + self._base_padding, 
-            self.y + self.max_size[1] + (OUTLINE_MARGIN * 2) + self._base_padding, 
+            self.x + self.max_size.x + self._base_padding, 
+            self.y + self.max_size.y + (OUTLINE_MARGIN * 2) + self._base_padding, 
             is_outline
         )
     }
+    
+    /// @description return general measurements.
+    /// @return {Struct.tte_coordinate_system} name description
     get_measurements = function (){
-        return [
-            self.max_size[0] + self._base_padding,
-            string_height(keyboard_string) + self.max_size[1] + OUTLINE_MARGIN * 2
-            
-        ]
+        return new tte_coordinate_system(self.max_size.x + self._base_padding, string_height(keyboard_string) + self.max_size.y + self._base_padding + OUTLINE_MARGIN * 2)
     }
     function get_if_active(){
         with (virtual_keyboard) {
@@ -214,6 +250,8 @@ function tte_gui_selectable_and_editable(_x, _y, _screen_group, _tab_index_for_o
                 self._cooldown = 1
             }
         }
+        if not _val
+            self.function_to_trigger(self, self.current_screen_group)
     }
     
     render_this_object = function (){
@@ -241,9 +279,8 @@ function tte_gui_selectable_and_editable(_x, _y, _screen_group, _tab_index_for_o
         show_red_seconds = max(0, show_red_seconds - get_current_deltatime() * 200)
         draw_set_colour(self.is_selected ? make_colour_rgb(255.0, 255.0 - show_red_seconds, 0.0) : c_white)
         render_rectangle(true)
-        var _maxSizeText = string_length(MAXIMUM_SIZE_TEXT)
         var _maxSizeKeyb = string_length(self.input_text)
-        var _currentStr = string_copy(self.input_text, _maxSizeKeyb - _maxSizeText, _maxSizeText + 1)
+        var _currentStr = string_copy(self.input_text, _maxSizeKeyb - MAXIMUM_SIZE_TEXT, MAXIMUM_SIZE_TEXT + 1)
         // allow editing when it's currently being edited.
         draw_text(self.x, self.y, _currentStr)
         // draw the selection thing
@@ -256,7 +293,7 @@ function tte_gui_selectable_and_editable(_x, _y, _screen_group, _tab_index_for_o
         if not is_currently_being_edited and is_selected {
             draw_set_alpha(0.5)
             draw_text(
-                x + self.get_measurements()[0],
+                x + self.get_measurements().x,
                 y,
                 tte_get_localization(
                 global.CURRENT_LANGUAGE,
@@ -286,8 +323,9 @@ function tte_selectable_button_text(_x, _y, _text, _screen_group, _tab_index_for
         draw_set_colour(is_allowed ? color : c_red)
         if is_selected {
             var _measurements = self.get_measurements()
-            draw_rectangle(x - OUTLINE_MARGIN, y - OUTLINE_MARGIN, x + _measurements[0] + OUTLINE_MARGIN, y + _measurements[1] + OUTLINE_MARGIN, true)
+            draw_rectangle(x - OUTLINE_MARGIN, y - OUTLINE_MARGIN, x + _measurements.x + OUTLINE_MARGIN, y + _measurements.y + OUTLINE_MARGIN, true)
         }
+        draw_set_font(global.CURRENT_FONTS.normal)
         draw_text_transformed(x, y, text, 1, 1, 0)
         draw_set_colour(c_white)
         if current_screen_group.disabled_group
@@ -307,10 +345,7 @@ function tte_selectable_button_text(_x, _y, _text, _screen_group, _tab_index_for
         }
     }
     get_measurements = function (){
-        return [
-            string_width(text),
-            string_height(text)
-        ]
+        return new tte_coordinate_system(string_width(text), string_height(text))
     }
 }
 
@@ -324,7 +359,7 @@ function tte_checkbox(_x, _y, _text, _is_enabled, _screen_group, _tab_index_for_
         draw_set_colour(is_enabled ? c_yellow : (is_allowed ? color : c_red))
         if is_selected {
             var _measurements = self.get_measurements()
-            draw_rectangle(x - OUTLINE_MARGIN, y - OUTLINE_MARGIN, x + _measurements[0] + OUTLINE_MARGIN, y + _measurements[1] + OUTLINE_MARGIN, true)
+            draw_rectangle(x - OUTLINE_MARGIN, y - OUTLINE_MARGIN, x + _measurements.x + OUTLINE_MARGIN, y + _measurements.y + OUTLINE_MARGIN, true)
         }
         draw_text_transformed(x, y, self.text, 1, 1, 0)
         draw_set_colour(c_white)
@@ -345,5 +380,7 @@ function tte_checkbox(_x, _y, _text, _is_enabled, _screen_group, _tab_index_for_
         }
     }
 }
+
+
 
 

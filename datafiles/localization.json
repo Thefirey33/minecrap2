@@ -8,6 +8,7 @@
 		"ok": "Accept",
 		"gamepad": "Using External Controller",
 		"keybinding": "Assign Keys",
+		"controllers": "External Controller Assignment",
 		"end_program": "End Program",
 		"pick_a_key": "Press Your Hand On A Key.",
 		"keyboard_instruction": "[Enter / Jump] to edit.",
@@ -29,7 +30,8 @@
 		"gamepad_left_sh": "Left Shoulder Button",
 		"gamepad_right_sh": "Right Shoulder Button",
 		"gamepad_left_st": "Left Shoulder Trigger",
-		"gamepad_right_st": "Right Shoulder Trigger"
+		"gamepad_right_st": "Right Shoulder Trigger",
+		"first_response": "No."
 	},
 	"tr" : {}
 }

@@ -28,6 +28,22 @@ function tte_load_file_all_lines(file_name){
     file_text_close(_file)
     return _fileStr
 }
+/// @desc this creates an advanced context for screen switching.
+/// @param {function} _function the function that contains the gui_handler as the first object as a parameter.
+function tte_advanced_screen_switcher(_function){
+    with (gui_handler)
+    {
+        _function(gui_handler)
+    }
+}
+/// @description these are the temporary variable keepers.
+global.TEMP_KEEPERS = {
+    a1 : undefined,
+    a2 : undefined,
+    a3 : undefined,
+    a4 : undefined,
+    a5 : undefined
+}
 
 global.VIRTUAL_MOUSE_CURSOR = [0, 0]
 global.CURRENT_PLAYER = undefined

@@ -1,4 +1,6 @@
 _g = lerp(_g, _isActive ? 1 : 0, get_current_deltatime() * 10)
+if not _isActive and _g <= 0
+    return
 draw_set_alpha(_g)
 var _leftX = (BASE_GAME_WIDTH / 2) - _backgroundWidth / 2
 var 

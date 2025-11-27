@@ -1,2 +1,2 @@
-_zoomedInRendering = []
+_zoomedInRendering = [100]
 _currentTime = 0
