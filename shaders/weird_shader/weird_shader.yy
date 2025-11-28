@@ -1,7 +1,7 @@
 {
   "$GMShader":"",
-  "%Name":"weirdShader",
-  "name":"weirdShader",
+  "%Name":"weird_shader",
+  "name":"weird_shader",
   "parent":{
     "name":"shaders",
     "path":"folders/shaders.yy",

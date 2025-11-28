@@ -1,3 +1,4 @@
+shader_set(weird_shader)
 var _time_diff = ((current_time - _time_before) + _offset) * get_current_deltatime()
 var _min = min(20, _time_diff)
 window_set_position(_wind_x + random_range(-_min, _min), _wind_y + random_range(-_min, _min))

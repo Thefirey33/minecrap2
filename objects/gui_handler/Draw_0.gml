@@ -1,6 +1,12 @@
 audio_emitter_gain(_currentEmitterInstance,  
     min(1, audio_emitter_get_gain(_currentEmitterInstance) + get_current_deltatime() / 100)
 )
+var _is_shader_glitch = shader_current() == weird_shader
+if !_is_shader_glitch
+{
+    shader_set(wavy_text)
+    shader_set_uniform_f(_uni, current_time)
+}
 // start drawing please.
 var _first = array_first(global._currentGroups)
 if array_length(global._currentGroups) > 0 {
@@ -20,3 +26,5 @@ if array_length(global._currentGroups) > 0 {
 }
 _first.opacity = lerp(_first.opacity, 1, get_current_deltatime() * 5)
 _first[$ "render_this_group"]()
+if !_is_shader_glitch
+    shader_reset()

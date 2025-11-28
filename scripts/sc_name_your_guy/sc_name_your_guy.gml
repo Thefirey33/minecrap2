@@ -1,5 +1,6 @@
 global.response_map = ds_map_create()
 ds_map_add(global.response_map, "gay", "first_response")
+ds_map_add(global.response_map, "femboy", "first_response")
 
 /// @param {Struct} screen_group the current group the screen is in.
 /// @param {Id.Instance} gui_handler the current gui_handler
@@ -29,7 +30,10 @@ function sc_name_your_guy(screen_group, gui_handler){
             16
         ),
         function _ignore(){},
-        sha1_string_utf8(current_time)
+        tte_get_localization(
+            global.CURRENT_LANGUAGE,
+            "input_name"
+        )
     )
     var _tte_localization = tte_get_localization(
             global.CURRENT_LANGUAGE,

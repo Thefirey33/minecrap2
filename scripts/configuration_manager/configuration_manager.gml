@@ -101,7 +101,7 @@ function tte_ready_config(){
     tte_save_or_load_configuration(false)
     // load the base game configurations...
     window_set_fullscreen(tte_get_config_value("game", "is_fullscreen"))
-    window_set_caption("STARTING_ROOM")
+    window_set_caption(tte_get_config_value("game", "game_name"))
     global.CURRENT_CONTROL_METHOD = tte_get_config_value("game", "is_gamepad") ? control_methods.gamepad : control_methods.keyboard
 }
 

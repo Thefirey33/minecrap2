@@ -18,7 +18,8 @@ global.GAMEPAD_SYSTEM = {
             interact: gp_face3,
             inventory: gp_face4,
             backspace: gp_shoulderl,
-            space: gp_shoulderr
+            space: gp_shoulderr,
+            upshift: gp_shoulderrb
         }
     }
 }

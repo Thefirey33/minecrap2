@@ -38,5 +38,5 @@
     "name":"dev_asset",
     "path":"sprites/dev_asset/dev_asset.yy",
   },
-  "visible":true,
+  "visible":false,
 }

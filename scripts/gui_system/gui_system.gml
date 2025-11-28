@@ -211,7 +211,8 @@ function tte_gui_selectable_and_editable(_x, _y, _screen_group, _tab_index_for_o
     MAXIMUM_SIZE_TEXT = max_size.x / 9
     function_to_trigger = _function_to_trigger
     show_debug_message(MAXIMUM_SIZE_TEXT)
-    input_text = _placeholder
+    placeholder = _placeholder
+    input_text = ""
     is_currently_being_edited = false
     show_red_seconds = 0.0
     _base_padding = 16
@@ -282,6 +283,11 @@ function tte_gui_selectable_and_editable(_x, _y, _screen_group, _tab_index_for_o
         var _maxSizeKeyb = string_length(self.input_text)
         var _currentStr = string_copy(self.input_text, _maxSizeKeyb - MAXIMUM_SIZE_TEXT, MAXIMUM_SIZE_TEXT + 1)
         // allow editing when it's currently being edited.
+        if string_length(_currentStr) == 0 {
+            draw_set_alpha(0.5)
+            draw_text(self.x, self.y, self.placeholder)
+            draw_set_alpha(1.0)
+        }
         draw_text(self.x, self.y, _currentStr)
         // draw the selection thing
         draw_set_colour(c_white)
@@ -355,7 +361,7 @@ function tte_checkbox(_x, _y, _text, _is_enabled, _screen_group, _tab_index_for_
     render_this_object = function () {
         // set the text to the current checkbox thing
         self.text = string("[{0}] {1}", is_enabled CHECKBOX_IF_ELSE, stored_text)
-        is_selected = (self.current_screen_group[$ "tab_index"] == tab_index_for_object)
+        is_selected = (self.current_screen_group[$ "tab_index"] == tab_index_for_object) 
         draw_set_colour(is_enabled ? c_yellow : (is_allowed ? color : c_red))
         if is_selected {
             var _measurements = self.get_measurements()

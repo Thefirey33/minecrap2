@@ -9,7 +9,7 @@ global.current_music = tte_create_audio_with_effects([_reverb_effect], AUDIO_ANO
 _currentEmitterInstance = global.current_music[$ "audio_emitter_instance"]
 audio_emitter_gain(_currentEmitterInstance, -100.0)
 currentMatrix = matrix_build_identity()
-
+_uni = shader_get_uniform(wavy_text, "TIME")
 global.current_screens = {
     "titlescreen": function create_titlescreen(){
         sc_titlescreen(tte_create_and_insert(), self)

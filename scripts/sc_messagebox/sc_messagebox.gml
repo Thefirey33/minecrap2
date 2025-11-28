@@ -16,7 +16,10 @@ function sc_messagebox(screen_group, gui_handler, msg, before_screen){
     var _button = new tte_selectable_button_text(
         gui_handler.x,
         gui_handler.y + _label.get_measurements().y + OUTLINE_MARGIN * 2,
-        "OK",
+        tte_get_localization(
+            global.CURRENT_LANGUAGE,
+            "ok"
+        ),
         screen_group,
         0,
         function triggerer(){
