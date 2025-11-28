@@ -46,17 +46,17 @@ function sc_name_your_guy(screen_group, gui_handler){
         screen_group,
         1,
         function trigger_ok(current_screen_group, self){
-            var _inpText = global.TEMP_KEEPERS.a2.input_text
+            var _inpText = global.TEMP_KEEPERS.a2.input_text 
             if string_lower(_inpText) == "thefirey33" {
-                global.FREEZE_GUI_CONTROLS = true
                 audio_stop_all()
-                
+                global.FREEZE_GUI_CONTROLS = true
                 instance_create_layer(
                     0,
                     0,
                     "GlitchLayer",
                     glitch_controller
                 )
+                return
             }
             var _resp = ds_map_exists(global.response_map, _inpText)
             if _resp {
@@ -68,8 +68,15 @@ function sc_name_your_guy(screen_group, gui_handler){
                     sc_messagebox(tte_create_and_insert(tte_gui_alignment.horizontal), m_gui_handler, global.TEMP_KEEPERS.a1, "name_your_guy")
                 })
             }
-            else {
-                // TODO
+            else { 
+                audio_stop_all()
+                global.FREEZE_GUI_CONTROLS = true
+                instance_create_layer(
+                    0,
+                    0,
+                    "GlitchLayer",
+                    first_transition_controller
+                )
             }
         }
     )

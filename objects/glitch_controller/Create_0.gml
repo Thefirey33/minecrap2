@@ -8,3 +8,4 @@ _time_before = current_time
 window_set_caption("")
 shader_set(weird_shader)
 _uni_pos = shader_get_uniform(weird_shader, "scale_ratio_pos")
+show_debug_message("starting g l i t c h")

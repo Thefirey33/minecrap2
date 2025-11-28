@@ -1,0 +1,6 @@
+_init_sound = audio_play_sound(snd_cymbal_transition, 100, false)
+_max_width_audio = audio_sound_length(_init_sound)
+_active_cam = camera_get_active()
+_active_cam_pos_x = camera_get_view_x(_active_cam)
+_active_cam_pos_y = camera_get_view_y(_active_cam)
+show_debug_message("starting scene transition")
