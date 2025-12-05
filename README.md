@@ -22,7 +22,7 @@ This project contains two important folders. The "include" and "src" folder. The
 After verifying that the project is layed out correctly, for clangd or other C++ tooling system, Use:
 
 ```bash
-    xmake project -k compile_commands 
+xmake project -k compile_commands 
 ```
 
 To generate the specified `compile_commands.json` file for the project. After the `compile_commands.json` is generated, you can use
@@ -32,7 +32,7 @@ To generate the specified `compile_commands.json` file for the project. After th
 For building the project, use this command below.
 
 ```bash
-    xmake
+xmake
 ```
 
 ### For Running
@@ -40,5 +40,5 @@ For building the project, use this command below.
 For running the project under your operating system, use this command below.
 
 ```bash
-    xmake run minecrap2
+xmake run minecrap2
 ```
