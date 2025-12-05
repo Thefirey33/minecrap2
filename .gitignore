@@ -1,0 +1,15 @@
+# Xmake cache
+.xmake/
+build/
+
+# MacOS Cache
+.DS_Store
+
+# ClangD Cache
+.cache
+
+# Code Editors
+.vscode
+
+# Compile commands, we do not need to copy this to the git repository.
+compile_commands.json
