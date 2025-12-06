@@ -4,10 +4,11 @@
 #include "tendrillion.hpp"
 #include <cassert>
 #include <functional>
+#include <string>
 
 tendrillion::tendrillion_gui::tendrillion_base_gui_object::
     tendrillion_base_gui_object(
-        tendrillion::tendrillion_gui::gui_position pos) {
+        tendrillion::tendrillion_gui::gui_position &pos) {
   this->position_on_screen = pos;
 }
 
@@ -26,6 +27,12 @@ tendrillion::tendrillion_gui::~tendrillion_gui() {
 }
 
 // Math.
+
+void tendrillion::tendrillion_gui::gui_position::get_from_vector2(
+    Vector2 other) {
+  this->x = static_cast<int>(other.x);
+  this->y = static_cast<int>(other.y);
+}
 
 inline tendrillion::tendrillion_gui::gui_position
 tendrillion::tendrillion_gui::gui_position::operator+(

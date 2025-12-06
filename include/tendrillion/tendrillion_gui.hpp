@@ -13,6 +13,7 @@ public:
       this->x = x;
       this->y = y;
     }
+    void get_from_vector2(Vector2 other);
     // addition
     inline tendrillion_gui::gui_position
     operator+(tendrillion_gui::gui_position other);
@@ -26,7 +27,7 @@ public:
   class tendrillion_base_gui_object {
   public:
     tendrillion_base_gui_object(
-        tendrillion::tendrillion_gui::gui_position position_on_screen);
+        tendrillion::tendrillion_gui::gui_position &position_on_screen);
     tendrillion_gui::gui_position position_on_screen = {0, 0};
     virtual tendrillion_gui::gui_position get_measurements() { return {0, 0}; }
     virtual void init() {}
