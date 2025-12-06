@@ -6,7 +6,7 @@
 #include <winuser.h>
 #endif
 
-#include "tendrillion_errors.h"
+#include "tendrillion_errors.hpp"
 
 void tendrillion::tendrillion_error_service::show_error(
     const char *error_message) {

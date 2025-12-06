@@ -1,7 +1,7 @@
 
-#include "tendrillion_driver.h"
-#include "tendrillion_errors.h"
-#include "tendrillion_ini_service.h"
+#include "tendrillion_driver.hpp"
+#include "tendrillion_errors.hpp"
+#include "tendrillion_ini_service.hpp"
 #include <memory>
 #include <stdexcept>
 

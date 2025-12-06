@@ -1,6 +1,6 @@
-#include "tendrillion_ini_service.h"
-#include "tendrillion_errors.h"
-#include "tendrillion_helper.h"
+#include "tendrillion_ini_service.hpp"
+#include "tendrillion_errors.hpp"
+#include "tendrillion_helper.hpp"
 #include <stdexcept>
 
 CSimpleIniA tendrillion::tendrillion_ini_service::ini;

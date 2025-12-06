@@ -1,4 +1,4 @@
-
+#pragma once
 
 #define TENDRILLION_INI_NAME "assets/engine_configuration.ini"
 #include "SimpleIni.h"

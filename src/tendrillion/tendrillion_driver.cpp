@@ -1,5 +1,5 @@
-#include "tendrillion_driver.h"
-#include "tendrillion.h"
+#include "tendrillion_driver.hpp"
+#include "tendrillion.hpp"
 #include <memory>
 
 int tendrillion::tendrillion_driver::start_tendrillion_instance(
@@ -10,5 +10,6 @@ int tendrillion::tendrillion_driver::start_tendrillion_instance(
   tendrillion_ge->initialize_tendrillion();
   tendrillion_ge->import_all_assets();
   tendrillion_ge->window_loop();
+  CloseWindow();
   return 0;
 }

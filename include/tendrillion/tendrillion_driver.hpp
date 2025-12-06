@@ -1,3 +1,4 @@
+#pragma once
 namespace tendrillion {
 class tendrillion_driver {
 public:

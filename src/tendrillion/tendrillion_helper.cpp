@@ -1,4 +1,4 @@
-#include "tendrillion_helper.h"
+#include "tendrillion_helper.hpp"
 #include <string>
 
 std::string

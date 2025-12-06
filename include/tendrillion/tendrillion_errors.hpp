@@ -1,4 +1,4 @@
-
+#pragma once
 
 namespace tendrillion {
 class tendrillion_error_service {

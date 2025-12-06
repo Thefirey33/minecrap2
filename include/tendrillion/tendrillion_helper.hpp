@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 namespace tendrillion {
 class tendrillion_helper {
