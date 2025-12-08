@@ -25,6 +25,8 @@ public:
   ~tendrillion_game_engine();
   bool asset_exists_texture(std::string asset_name);
   bool asset_exists_sound(std::string asset_name);
+  Sound &get_sound(std::string asset_name);
+  Texture2D &get_texture(std::string asset_name);
   void initialize_tendrillion();
   void import_all_assets();
   void window_loop();

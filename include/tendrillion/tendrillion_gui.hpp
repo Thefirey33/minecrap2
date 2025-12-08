@@ -37,8 +37,8 @@ public:
   public:
     std::vector<tendrillion_gui::tendrillion_base_gui_object *> objects = {};
 
-    void initialize_all();
-    void render_screen();
+    virtual void initialize_all();
+    virtual void render_screen();
     void loop_over_gui_components(
         std::function<void(tendrillion_gui::tendrillion_base_gui_object *)>);
   };
